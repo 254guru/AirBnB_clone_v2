@@ -29,6 +29,6 @@ sudo chown -R ubuntu:ubuntu /data/
 location_header="location \/hbnb\_static\/ {"
 location_content="alias \/data\/web\_static\/current\/;"
 new_location="\n\t$location_header\n\t\t$location_content\n\t}\n"
-sed -i "37s/$/$new_location/" /etc/nginx/sites-available/default
+sudo sed -i "37s/$/$new_location/" /etc/nginx/sites-available/default
 
 sudo service nginx restart

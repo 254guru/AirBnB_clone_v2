@@ -1,0 +1,3 @@
+pip uninstall invoke
+pip install invoke==2.*
+

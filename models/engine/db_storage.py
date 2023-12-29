@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """This module defines the DBStorage class for database storage"""
-import os
+from os import getenv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
 from models.base_model import BaseModel, Base
@@ -70,4 +70,4 @@ class DBStorage:
 
     def close(self):
         """Close the session"""
-        self.__session.close()
+        self.__session.remove()

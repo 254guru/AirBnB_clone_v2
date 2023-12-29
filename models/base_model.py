@@ -3,8 +3,11 @@
 import uuid
 from datetime import datetime
 from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import Column, String, DateTime
+
 
 Base = declarative_base()
+
 
 class BaseModel:
     """A base class for all hbnb models"""
@@ -45,7 +48,8 @@ class BaseModel:
         dictionary['__class__'] = type(self).__name__
         dictionary['created_at'] = self.created_at.isoformat()
         dictionary['updated_at'] = self.updated_at.isoformat()
-        dictionary.pop('_sa_instance_state', None)  # Remove SQLAlchemy-specific attribute if present
+        dictionary.pop('_sa_instance_state', None)
+        # Remove SQLAlchemy-specific attribute if present
         return dictionary
 
     def delete(self):

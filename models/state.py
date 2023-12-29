@@ -9,10 +9,10 @@ from os import getenv
 
 class State(BaseModel, Base):
     """ State class """
-    if getenv("HBNB_TYPE_STORAGE") == "db":
-        __tablename__ = 'states'
+    __tablename__ = 'states'
+    name = Column(String(128), nullable=False)
 
-        name = Column(String(128), nullable=False)
+    if getenv("HBNB_TYPE_STORAGE") == "db":
         cities = relationship("City", backref="state", cascade="all, delete")
 
     else:

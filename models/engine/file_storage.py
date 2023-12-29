@@ -3,15 +3,7 @@
 Module Docs
 """
 import json
-from models.base_model import BaseModel
-from models.user import User
 from os import path
-from models.state import State
-from models.city import City
-from models.place import Place
-from models.review import Review
-from models.amenity import Amenity
-
 
 class FileStorage:
     """
@@ -52,14 +44,28 @@ class FileStorage:
             json.dump(data, file)
 
     def reload(self):
-        """
-        load instances
-        """
-        if path.exists(self.__file_path):
-            with open(self.__file_path, mode='r', encoding='utf-8') as f:
-                json_dict = json.loads(f.read())
-                for key, value in json_dict.items():
-                    self.__objects[key] = eval(value['__class__'])(**value)
+        """Loads storage dictionary from file"""
+        from models.base_model import BaseModel
+        from models.user import User
+        from models.place import Place
+        from models.state import State
+        from models.city import City
+        from models.amenity import Amenity
+        from models.review import Review
+
+        classes = {
+            'BaseModel': BaseModel, 'User': User, 'Place': Place,
+            'State': State, 'City': City, 'Amenity': Amenity,
+            'Review': Review
+        }
+        try:
+            temp = {}
+            with open(FileStorage.__file_path, 'r') as f:
+                temp = json.load(f)
+                for key, val in temp.items():
+                    self.all()[key] = classes[val['__class__']](**val)
+        except FileNotFoundError:
+            pass
 
     def delete(self, obj=None):
         """

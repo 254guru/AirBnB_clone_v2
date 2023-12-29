@@ -5,6 +5,7 @@ Module Docs
 import json
 from os import path
 
+
 class FileStorage:
     """
     parent class module that assigns storage

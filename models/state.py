@@ -3,6 +3,8 @@
 from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship
 from models.base_model import BaseModel, Base
+from models.city import city
+from models import storage_type
 
 
 class State(BaseModel, Base):
@@ -18,7 +20,6 @@ class State(BaseModel, Base):
             """
             return the list of city objects linked to current state
             """
-            from models.city import city
             city_list = []
             for city in storage.all(City).values():
                 if city.state_id == self.id:

@@ -25,8 +25,8 @@ def cities_by_states():
             cities = state.cities()
         cities = sorted(cities, key=lambda city: city.name)
         cities_and_states.append((state, cities))
-    return render_template('cities_by_states.html',
-                           cities_and_states=cities_and_states)
+    return render_template('8-cities_by_states.html',
+                           states=states, cities_and_states=cities_and_states)
 
 
 @app.teardown_appcontext

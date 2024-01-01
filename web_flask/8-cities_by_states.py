@@ -16,17 +16,7 @@ app = Flask(__name__)
 def cities_by_states():
     states = storage.all(State).values()
     states = sorted(states, key=lambda state: state.name)
-    cities_and_states = []
-    for state in states:
-        cities = []
-        if type(storage).__name__ == 'DBStorage':
-            cities = state.cities
-        else:
-            cities = state.cities()
-        cities = sorted(cities, key=lambda city: city.name)
-        cities_and_states.append((state, cities))
-    return render_template('8-cities_by_states.html',
-                           states=states, cities_and_states=cities_and_states)
+    return render_template('8-cities_by_states.html', states=states)
 
 
 @app.teardown_appcontext

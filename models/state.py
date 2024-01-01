@@ -12,12 +12,13 @@ class State(BaseModel, Base):
     """ State class """
     __tablename__ = 'states'
     name = Column(String(128), nullable=False)
-    cities = relationship("City", backref="state", cascade="all, delete-orphan")
+    cities = relationship("City", backref="state",
+                          cascade="all, delete-orphan")
 
     @property
     def cities(self):
         """Getter attribute that returns the list of City instances."""
-        
+
         city_list = []
         for city in models.storage.all(City).values():
             if self.id == city.state_id:

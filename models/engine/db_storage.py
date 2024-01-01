@@ -34,14 +34,14 @@ class DBStorage:
         """
 
         db_uri = "{0}+{1}://{2}:{3}@{4}:3306/{5}".format(
-            'mysql', 'mysqldb', getenv('HBNB_MYSQL_USER'),
-            getenv('HBNB_MYSQL_PWD'), getenv('HBNB_MYSQL_HOST'),
-            getenv('HBNB_MYSQL_DB'))
+            'mysql', 'mysqldb', os.getenv('HBNB_MYSQL_USER'),
+            os.getenv('HBNB_MYSQL_PWD'), os.getenv('HBNB_MYSQL_HOST'),
+            os.getenv('HBNB_MYSQL_DB'))
 
         self.__engine = create_engine(db_uri, pool_pre_ping=True)
         self.reload()
 
-        if getenv('HBNB_ENV') == 'test':
+        if os.getenv('HBNB_ENV') == 'test':
             Base.metadata.drop_all(self.__engine)
 
     def all(self, cls=None):

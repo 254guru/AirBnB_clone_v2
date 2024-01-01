@@ -2,7 +2,7 @@
 """
 starts a web flask application
 """
-from flask import Flask
+from flask import Flask, render_template
 from models import *
 from models import storage
 
@@ -11,9 +11,10 @@ app = Flask(__name__)
 
 @app.route('/hbnb_filters', strict_slashes=False)
 def filters():
-    avail = storage.all("Amenity").values()
-    states = storage.all("State").values()
-    return render_template('10-hbnb_filters.html', states=states, avail=avail)
+    amenities = storage.all(Amenity).values()
+    states = storage.all(State).values()
+    return render_template('10-hbnb_filters.html',
+                           states=states, amenities=amenities)
 
 
 @app.teardown_appcontext
